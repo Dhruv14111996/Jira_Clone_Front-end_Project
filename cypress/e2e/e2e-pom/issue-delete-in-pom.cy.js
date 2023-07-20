@@ -19,13 +19,13 @@ describe('Issue delete', () => {
     IssueModal.clickDeleteButton();
     IssueModal.confirmDeletion();
     //Check if the issue is no longer visible on the board
-    cy.contains(issueTitle).should('not.exist');
+    IssueModal.ensureIssueIsNotVisibleOnBoard(issueTitle);
   });
 
   it('Should cancel deletion process successfully', () => {
     IssueModal.clickDeleteButton();
     IssueModal.cancelDeletion();
     //Check if the issue is still visible on the board
-    cy.contains(issueTitle).should('be.visible');
+    IssueModal.ensureIssueIsVisibleOnBoard(issueTitle);
   });
 });

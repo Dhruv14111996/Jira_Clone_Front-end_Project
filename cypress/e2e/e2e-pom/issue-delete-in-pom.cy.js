@@ -25,7 +25,8 @@ describe('Issue delete', () => {
   it('Should cancel deletion process successfully', () => {
     IssueModal.clickDeleteButton();
     IssueModal.cancelDeletion();
-    //Check if the issue is still visible on the board
+    //Close detail model and Check if the issue is still visible on the board
+    IssueModal.closeDetailModal();
     IssueModal.ensureIssueIsVisibleOnBoard(issueTitle);
   });
 });

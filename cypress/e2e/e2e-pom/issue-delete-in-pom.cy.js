@@ -16,12 +16,16 @@ describe('Issue delete', () => {
   const issueTitle = 'This is an issue of type: Task.';
 
   it('Should delete issue successfully', () => {
-    IssueModal.clickDeleteButton(issueTitle);
+    IssueModal.clickDeleteButton();
     IssueModal.confirmDeletion();
+    //Check if the issue is no longer visible on the board
+    cy.contains(issueTitle).should('not.exist');
   });
 
   it('Should cancel deletion process successfully', () => {
-    IssueModal.clickDeleteButton(issueTitle);
+    IssueModal.clickDeleteButton();
     IssueModal.cancelDeletion();
+    //Check if the issue is still visible on the board
+    cy.contains(issueTitle).should('be.visible');
   });
 });

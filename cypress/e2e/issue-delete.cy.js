@@ -17,7 +17,7 @@ describe('Issue delete', () => {
         cy.get('[data-testid="modal:confirm"]').should('not.exist');
         //Delete issue should not visible on Jira clone
         cy.get('[data-testid="board-list:backlog').should('be.visible').and('have.length', '1').within(() => {
-            cy.get('[data-testid="list-issue"]').should('have.length', '3');
+            cy.get('[data-testid="list-issue"]').contains('This is an issue of type: Task.').should('not.exist');
 
         });
     });
@@ -35,7 +35,7 @@ describe('Issue delete', () => {
         cy.get('button i[data-testid="icon:close"]').click();
         //Issue should visible on Jira clone
         cy.get('[data-testid="board-list:backlog').should('be.visible').and('have.length', '1').within(() => {
-            cy.get('[data-testid="list-issue"]').should('have.length', '4');
+            cy.get('[data-testid="list-issue"]').contains('This is an issue of type: Task.').should('exist');
 
         });
     });

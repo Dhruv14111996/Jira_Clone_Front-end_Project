@@ -19,7 +19,7 @@ describe('Issue create', () => {
         cy.reload();
         cy.contains('Issue has been successfully created.').should('not.exist');
         cy.get('[data-testid="board-list:backlog').should('be.visible').and('have.length', '1').within(() => {
-            cy.get('[data-testid="list-issue"]').should('have.length', '5').first().find('p').contains('Bug');;
+            cy.get('[data-testid="list-issue"]').should('have.length', '5').first().find('p').contains('Bug');
         });
         //Add estimation 
         cy.contains('Bug').click();
@@ -46,6 +46,7 @@ describe('Issue create', () => {
         cy.get('input[placeholder="Number"]').eq(1).click().type('value=2');
         cy.get('input[placeholder="Number"]').eq(2).click().type('value=5');
         cy.get('[data-testid="modal:tracking"]').contains('button', 'Done').click();
+        cy.contains('No time logged').should('not.exist');
         cy.get('[data-testid="icon:stopwatch"]').next().should('contain', '2h logged')
             .should('not.contain', 'No time logged').and('contain', '5h remaining');
         //Remove Logged time

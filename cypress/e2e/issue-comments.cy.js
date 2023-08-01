@@ -100,4 +100,3 @@ describe('Issue comments creating, editing and deleting', () => {
 
     });
 });
-

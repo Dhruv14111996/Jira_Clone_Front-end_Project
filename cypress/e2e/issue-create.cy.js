@@ -173,7 +173,7 @@ describe('Issue create', () => {
     });
   });
 
-  it.only('should validate that issue title on the board does not have leading and trailing spaces', () => {
+  it('should validate that issue title on the board does not have leading and trailing spaces', () => {
     const title = ' Hello  world '
     cy.get('.ql-editor').type('My bug description');
     cy.get('input[name="title"]').clear().type(title);

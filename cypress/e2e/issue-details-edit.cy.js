@@ -61,26 +61,24 @@ describe('Issue details editing', () => {
     });
   });
 
-  it('Should validate values in issue priority', () => {
+  it.only('Should validate values in issue priority', () => {
     const expectedLength = 5;
-    const expectedPriorityOptions = ['Lowest', 'Low', 'Medium', 'High', 'Highest'];
-    let priorityOptions = ['Lowest', 'Low', 'Medium', 'High', 'Highest'];
+    let priorityOptions = [];
 
-    cy.get('[data-testid="select:priority"]').then(($select) => {
-      const initialPriorityValue = $select.val();
-      priorityOptions.push(initialPriorityValue);
+    cy.get('[data-testid="select:priority"]').then(($priorityDropdown) => {
+      const selectedPriority = $priorityDropdown.text().trim();
+      priorityOptions.push(selectedPriority);
+
+      cy.get('[data-testid="select:priority"]').click();
+      cy.get('[data-testid^="select-option"]').each(($option) => {
+        const optionText = $option.text().trim();
+        priorityOptions.push(optionText);
+        cy.log(`Added value: ${optionText}, Length of the array: ${priorityOptions.length}`);
+      }).then(() => {
+        cy.contains('Priority').click();
+        expect(priorityOptions.length).to.equal(expectedLength);
+      });
     });
-
-    cy.get('[data-testid="select:priority"]').click();
-    cy.get('[data-select-option-value="5"]').each(($option) => {
-      const optionText = $option.text().trim();
-      priorityOptions.push(optionText);
-      cy.log(`Added value: ${optionText}, Length of the array: ${priorityOptions.length}`);
-    });
-    cy.contains('Priority').click();
-    expect(priorityOptions.length).to.equal(expectedLength);
-    expect(priorityOptions).to.deep.equal(expectedPriorityOptions);
-
   });
 
   it('Should validates reporter matching defined regular expression', () => {

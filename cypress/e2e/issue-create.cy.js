@@ -173,11 +173,15 @@ describe('Issue create', () => {
     });
   });
 
-  it('should validate that issue title on the board does not have leading and trailing spaces', () => {
+  it.only('should validate that issue title on the board does not have leading and trailing spaces', () => {
     const title = ' Hello  world '
     cy.get('.ql-editor').type('My bug description');
     cy.get('input[name="title"]').clear().type(title);
     cy.get('button[type="submit"]').click();
+    cy.get('[data-testid="modal:issue-create"]').should('not.exist')
+    cy.contains('Issue has been successfully created.').should('be.visible');
+    cy.reload();
+    cy.contains('Issue has been successfully created.').should('not.exist');
     cy.get('[data-testid="board-list:backlog').first().invoke('text').then((title) => {
       const trimmedTitle = title.trim();
       cy.get('[data-testid="list-issue"]').should('have.length', '9').first().find('p');

@@ -61,7 +61,8 @@ describe('Issue details editing', () => {
     });
   });
 
-  it.only('Should validate values in issue priority', () => {
+  //Bonus Task 1
+  it('Should validate values in issue priority', () => {
     const expectedLength = 5;
     let priorityOptions = [];
 
@@ -81,6 +82,7 @@ describe('Issue details editing', () => {
     });
   });
 
+  //Bonus Task 2
   it('Should validates reporter matching defined regular expression', () => {
     const reporterName = "Pickle Rick"
     cy.get('[data-testid="avatar:Pickle Rick"]').invoke('text').then((reporterName) => {
